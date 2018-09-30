@@ -1,35 +1,37 @@
-export const fetchContacts2 = () => [
-  {
-    name: "Joe Smith",
-    avatar: "https://randomuser.me/api/portraits/thumb/men/65.jpg",
-    phone: "111"
-  },
-  {
-    name: "Bob Marley",
-    avatar: "https://randomuser.me/api/portraits/thumb/men/6.jpg",
-    phone: "222"
-  },
-  {
-    name: "Antony Hopkins",
-    avatar: "https://randomuser.me/api/portraits/thumb/men/5.jpg",
-    phone: "777"
-  },
-  {
-    name: "Don Basten",
-    avatar: "https://randomuser.me/api/portraits/thumb/men/15.jpg",
-    phone: "050-111-11-88"
-  }
-];
-
 export const fetchContacts = () => {
   return fetch("https://randomuser.me/api/?results=30")
     .then(res => res.json())
     .then(json => {
       return json.results.map(item => ({
-        name: item.name.first,
+        name: capitalize(item.name.first) + " " + capitalize(item.name.last),
         avatar: item.picture.thumbnail,
-        phone: item.cell
+        phone: item.phone
       }));
     })
     .catch(e => console.log(e));
 };
+
+export const fetchRandomContact = () => {
+  return fetch("https://randomuser.me/api/")
+    .then(res => res.json())
+    .then(json => json.results[0])
+    .then(contact => {
+      const {
+        name: { first, last },
+        picture: { thumbnail },
+        phone,
+        email,
+        cell
+      } = contact;
+      return {
+        name: capitalize(first) + " " + capitalize(last),
+        avatar: thumbnail,
+        phone,
+        email,
+        cell
+      };
+    })
+    .catch(e => console.log(e));
+};
+
+const capitalize = str => str.charAt(0).toUpperCase() + str.slice(1);
