@@ -5,7 +5,10 @@ export const fetchContacts = () => {
       return json.results.map(item => ({
         name: capitalize(item.name.first) + " " + capitalize(item.name.last),
         avatar: item.picture.thumbnail,
-        phone: item.phone
+        phone: item.phone,
+        id: item.login.uuid,
+        email: item.email,
+        cell: item.cell
       }));
     })
     .catch(e => console.log(e));

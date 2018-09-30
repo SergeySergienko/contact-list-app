@@ -34,8 +34,18 @@ export default class Contacts extends Component {
     }
   }
   renderContact = ({ item }) => {
-    const { name, avatar, phone } = item;
-    return <ContactListItem name={name} avatar={avatar} phone={phone} />;
+    const {
+      navigation: { navigate }
+    } = this.props;
+    const { name, avatar, phone, id } = item;
+    return (
+      <ContactListItem
+        name={name}
+        avatar={avatar}
+        phone={phone}
+        onPress={() => navigate("Profile", { contact: item })}
+      />
+    );
   };
   render() {
     const { contacts, loading, error } = this.state;

@@ -1,17 +1,19 @@
 import React, { Component } from "react";
-import { Text, View, StyleSheet, Image } from "react-native";
+import { Text, View, StyleSheet, Image, TouchableOpacity } from "react-native";
 
 export default class ContactListItem extends Component {
   render() {
-    const { name, avatar, phone } = this.props;
+    const { name, avatar, phone, onPress } = this.props;
     return (
-      <View style={styles.contact}>
-        <Image style={styles.image} source={{ uri: avatar }} />
-        <View style={styles.text}>
-          <Text style={styles.name}>{name}</Text>
-          <Text style={styles.phone}>{phone}</Text>
+      <TouchableOpacity onPress={onPress}>
+        <View style={styles.contact}>
+          <Image style={styles.image} source={{ uri: avatar }} />
+          <View style={styles.text}>
+            <Text style={styles.name}>{name}</Text>
+            <Text style={styles.phone}>{phone}</Text>
+          </View>
         </View>
-      </View>
+      </TouchableOpacity>
     );
   }
 }
