@@ -1,15 +1,17 @@
 import React, { Component } from "react";
-import { Text, View, StyleSheet, Image } from "react-native";
+import { Text, View, StyleSheet, Image, TouchableOpacity } from "react-native";
 
 export default class ContactThumbnail extends Component {
   render() {
-    const { name, avatar, phone } = this.props;
+    const { name, avatar, phone, onPress } = this.props;
     return (
-      <View style={styles.contact}>
-        <Image style={styles.image} source={{ uri: avatar }} />
-        <Text style={styles.name}>{name}</Text>
-        <Text style={styles.phone}>{phone}</Text>
-      </View>
+      <TouchableOpacity onPress={onPress}>
+        <View style={styles.contact}>
+          <Image style={styles.image} source={{ uri: avatar }} />
+          <Text style={styles.name}>{name}</Text>
+          <Text style={styles.phone}>{phone}</Text>
+        </View>
+      </TouchableOpacity>
     );
   }
 }
@@ -30,10 +32,11 @@ const styles = StyleSheet.create({
     fontSize: 16
   },
   image: {
-    width: 100,
-    height: 100,
-    borderRadius: 50,
+    width: 90,
+    height: 90,
+    borderRadius: 45,
     borderWidth: 1,
-    borderColor: "white"
+    borderColor: "white",
+    marginHorizontal: 15
   }
 });

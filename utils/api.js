@@ -8,7 +8,8 @@ export const fetchContacts = () => {
         phone: item.phone,
         id: item.login.uuid,
         email: item.email,
-        cell: item.cell
+        cell: item.cell,
+        favorite: item.dob.age < 35 ? true : false
       }));
     })
     .catch(e => console.log(e));
